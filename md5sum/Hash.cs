@@ -11,10 +11,12 @@ namespace md5sum
     {
         private const int bufSize = 1 << 20; /* 1MB缓存 */
         private static readonly byte[] tempBuf = new byte[bufSize];
+        private static readonly StringBuilder text = new StringBuilder();
 
-        private readonly string sCase = "x2";
-        private readonly int calcCount = 0;
         private long nowBytes, allBytes;
+
+        private readonly string sCase;
+        private readonly int calcCount = 0;
         private readonly bool[] condition = { true, true, true, true, true, true, true };
         private readonly CancellationToken token;
 
@@ -34,7 +36,9 @@ namespace md5sum
                     calcCount++; /* 多少种计算方式 */
 
             if (condition[6])
-                sCase = "X2";
+                sCase = "0123456789ABCDEF";
+            else
+                sCase = "0123456789abcdef";
         }
 
         public delegate void UpdatePbUI(bool isNow, int val, int max);
@@ -54,7 +58,6 @@ namespace md5sum
 
             int count = 1;
             FileStream fr = null;
-            StringBuilder text = new StringBuilder();
             foreach (string path in paths)
             {
                 try
@@ -82,25 +85,13 @@ namespace md5sum
 
                         fr = File.OpenRead(path);
                         if (condition[2])
-                        {
-                            CalculateHash(MD5.Create(), fr, text.Clear().Append("MD5    ："));
-                            AppendTbShowText(text.ToString());
-                        }
+                            CalculateHash(MD5.Create(), fr, "MD5    ：");
                         if (condition[3])
-                        {
-                            CalculateHash(SHA1.Create(), fr, text.Clear().Append("SHA1   ："));
-                            AppendTbShowText(text.ToString());
-                        }
+                            CalculateHash(SHA1.Create(), fr, "SHA1   ：");
                         if (condition[4])
-                        {
-                            CalculateHash(SHA256.Create(), fr, text.Clear().Append("SHA256 ："));
-                            AppendTbShowText(text.ToString());
-                        }
+                            CalculateHash(SHA256.Create(), fr, "SHA256 ：");
                         if (condition[5])
-                        {
-                            CalculateHash(Crc32.Create(), fr, text.Clear().Append("CRC32  ："));
-                            AppendTbShowText(text.ToString());
-                        }
+                            CalculateHash(Crc32.Create(), fr, "CRC32  ：");
                     }
                 }
                 catch (CancelException ex)
@@ -123,26 +114,16 @@ namespace md5sum
             UpdateStartStopUI(false); /* 结束任务,修改UI控件属性 */
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="mi"></param>
-        /// <param name="fr"></param>
-        /// <param name="sw"></param>
-        private void CalculateHash(HashAlgorithm mi, FileStream fr, StringBuilder sw)
+        private void CalculateHash(HashAlgorithm mi, FileStream fr, string prefix)
         {
             try
             {
-                fr.Seek(0, SeekOrigin.Begin);
                 int num;
-                while (true)
+                fr.Seek(0, SeekOrigin.Begin); /* 定位到文件开头,计算hash */
+                while ((num = fr.Read(tempBuf, 0, bufSize)) > 0)
                 {
                     if (token.IsCancellationRequested)
                         throw new CancelException("操作取消");
-
-                    num = fr.Read(tempBuf, 0, bufSize);
-                    if (num <= 0)
-                        break;
 
                     mi.TransformBlock(tempBuf, 0, num, tempBuf, 0);
 
@@ -150,10 +131,12 @@ namespace md5sum
                     /* 更新进度条,下面计算有点危险,但是一般也遇不到非常大的文件 */
                     UpdatePbDelegate(true, (int)(100 * nowBytes / allBytes), -1);
                 }
-
                 mi.TransformFinalBlock(tempBuf, 0, 0);
+
+                text.Clear().Append(prefix); /* 写入前缀,将字节转换为16进制字符串 */
                 foreach (byte b in mi.Hash)
-                    sw.Append(b.ToString(sCase));
+                    text.Append(sCase[b >> 4]).Append(sCase[b & 0xf]);
+                AppendTbShowText(text.AppendLine().ToString());
             }
             catch (CancelException)
             {
@@ -161,12 +144,11 @@ namespace md5sum
             }
             catch (Exception ex)
             {
-                sw.Clear().Append(ex.Message);
+                AppendTbShowText(ex.Message + Environment.NewLine);
             }
             finally
             {
                 mi.Dispose();
-                sw.AppendLine();
             }
         }
 

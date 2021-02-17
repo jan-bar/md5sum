@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.IO.Pipes;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -28,7 +27,7 @@ namespace md5sum
         public Md5Form(string[] args)
         {
             InitializeComponent();
-            handleQueue.Enqueue(args);
+            HandleQueueEnqueue(args);
         }
 
         private void Md5Form_Load(object sender, EventArgs e)
@@ -57,7 +56,7 @@ namespace md5sum
                         server.WaitForConnection();
                         using (StreamReader sr = new StreamReader(server))
                         {
-                            handleQueue.Enqueue(sr.ReadLine().Split('|'));
+                            HandleQueueEnqueue(sr.ReadLine().Split('|'));
                         }
                     }
                 }
@@ -68,28 +67,19 @@ namespace md5sum
                 Random rand = new Random(DateTime.Now.Millisecond);
                 while (true)
                 {
-                    Thread.Sleep(rand.Next(50, 500)); /* 让电脑适当放松 */
+                    Thread.Sleep(rand.Next(100, 500)); /* 让电脑适当放松 */
                     if (handleQueue.TryDequeue(out string[] paths))
                     {
-                        paths = FilterPath(paths);
-                        if (paths.Length > 0)
-                        {
-                            CtrlTask = new CancellationTokenSource();
+                        CtrlTask = new CancellationTokenSource();
 
-                            Hash hash = new Hash(CtrlTask.Token, CbVersion.Checked, CbTime.Checked, CbMd5.Checked, CbSha1.Checked, CbSha256.Checked, CbCrc32.Checked, CbUpLe.Checked);
-                            hash.UpdatePbDelegate = UpdatePbUIStatus;
-                            hash.AppendTbShowText = AppendTbShowStatus;
-                            hash.UpdateStartStopUI = StartStopUpdateUI;
+                        Hash hash = new Hash(CtrlTask.Token, CbVersion.Checked, CbTime.Checked, CbMd5.Checked, CbSha1.Checked, CbSha256.Checked, CbCrc32.Checked, CbUpLe.Checked);
+                        hash.UpdatePbDelegate = UpdatePbUIStatus;
+                        hash.AppendTbShowText = AppendTbShowStatus;
+                        hash.UpdateStartStopUI = StartStopUpdateUI;
+                        hash.Calculate(paths);
 
-                            /* 开启计算任务,可以用CtrlTask取消任务 */
-                            Task calcTask = new Task(() => { hash.Calculate(paths); }, CtrlTask.Token);
-                            calcTask.Start();
-                            calcTask.Wait();
-                            calcTask.Dispose();
-
-                            CtrlTask.Dispose();
-                            CtrlTask = null;
-                        }
+                        CtrlTask.Dispose();
+                        CtrlTask = null;
                     }
                 }
             });
@@ -196,13 +186,9 @@ namespace md5sum
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
             if (TbInput.Focused)
-            { /* 焦点在界面敲回车触发,需要识别焦点在输入框中敲回车 */
-                SelectCmpText();
-            }
+                SelectCmpText(); /* 焦点在界面敲回车触发,需要识别焦点在输入框中敲回车 */
             else if (openAllFile.ShowDialog() == DialogResult.OK)
-            {
-                handleQueue.Enqueue(openAllFile.FileNames);
-            }
+                HandleQueueEnqueue(openAllFile.FileNames);
         }
 
         private void BtnCopy_Click(object sender, EventArgs e)
@@ -265,7 +251,8 @@ namespace md5sum
 
         private void TbShow_DragDrop(object sender, DragEventArgs e)
         {
-            handleQueue.Enqueue((string[])e.Data.GetData(DataFormats.FileDrop));
+            /* 拖拽文件到文本框 */
+            HandleQueueEnqueue((string[])e.Data.GetData(DataFormats.FileDrop));
             TbShow.Cursor = Cursors.IBeam;
         }
 
@@ -284,6 +271,17 @@ namespace md5sum
                     Clipboard.SetDataObject(input.SelectedText, true);
                 }
             }
+        }
+
+        /// <summary>
+        /// 传入参数过滤后再写入队列
+        /// </summary>
+        /// <param name="paths">传入文件列表</param>
+        private void HandleQueueEnqueue(string[] paths)
+        {
+            paths = FilterPath(paths);
+            if (paths.Length > 0)
+                handleQueue.Enqueue(paths);
         }
 
         /// <summary>
