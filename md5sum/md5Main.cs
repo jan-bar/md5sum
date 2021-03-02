@@ -33,6 +33,7 @@ namespace md5sum
                 if (args.Length == 1 && HandleRegistryKey(args[0].ToLower()))
                     return; /* 操作注册表,增删右键菜单 */
 
+                System.Threading.Thread.Sleep(105);
                 hMutex = CreateMutex(IntPtr.Zero, true, Md5Form.Md5FormName);
                 if (hMutex != IntPtr.Zero && Marshal.GetLastWin32Error() == ERROR_ALREADY_EXISTS)
                 {
@@ -41,8 +42,8 @@ namespace md5sum
                     {
                         ShowWindow(hwnd, 9);
                         SetForegroundWindow(hwnd);
-                        Md5Form.SendFile(args);
                     }
+                    Md5Form.SendFile(args);
                 }
                 else
                 {

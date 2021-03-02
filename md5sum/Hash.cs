@@ -27,13 +27,12 @@ namespace md5sum
         {
             this.token = token;
 
-            int i = (vals.Length < condition.Length ? vals.Length : condition.Length) - 1;
-            for (; i >= 0; i--)
+            for (int i = 0; i < condition.Length; i++)
+            {
                 condition[i] = vals[i];
-
-            for (i = 2; i <= 5; i++)
-                if (condition[i])
+                if (i >= 2 && i <= 5 && condition[i])
                     calcCount++; /* 多少种计算方式 */
+            }
 
             if (condition[6])
                 sCase = "0123456789ABCDEF";
@@ -66,7 +65,8 @@ namespace md5sum
 
                     text.Clear().Append("文件路径：").AppendLine(fileInfo.FullName);
                     nowBytes = fileInfo.Length;
-                    text.Append("文件大小：").AppendLine(ConvertSizeToByte(nowBytes));
+                    text.Append("文件大小：");
+                    ConvertSizeToByte(nowBytes);
 
                     if (condition[0])
                     {
@@ -157,15 +157,17 @@ namespace md5sum
         /// </summary>
         private static readonly long[] DivSize = { (long)1 << 10, (long)1 << 20, (long)1 << 30, (long)1 << 40, (long)1 << 50 };
         private static readonly string[] ByteUnit = { " B", " KB", " MB", " GB", " TB" };
-        private static string ConvertSizeToByte(long size)
+        private static void ConvertSizeToByte(long size)
         {
             int i = 0;
             for (; i < ByteUnit.Length; i++)
                 if (size < DivSize[i])
                     break;
-            if (i == 0 || i == ByteUnit.Length)
-                return size.ToString() + ByteUnit[0]; /* 小于KB,大于TB,用B */
-            return ((double)size / DivSize[i - 1]).ToString("f2") + ByteUnit[i];
+            text.Append(size).Append(ByteUnit[0]);
+            if (i > 0 && i < ByteUnit.Length)
+                text.Append("(").Append(((double)size / DivSize[i - 1]).ToString("f2")).Append(ByteUnit[i]).AppendLine(")");
+            else
+                text.AppendLine();
         }
     }
 

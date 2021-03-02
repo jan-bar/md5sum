@@ -39,7 +39,6 @@ namespace md5sum
             else
                 Location = AppConfig.Pos;
 
-            Text = Md5FormName; /* 设置标题栏文字 */
             TbShow.Font = new Font(TbShow.Font.Name, 10);
 
             CbArr = new CheckBox[] { CbVersion, CbTime, CbMd5, CbSha1, CbSha256, CbCrc32, CbUpLe };

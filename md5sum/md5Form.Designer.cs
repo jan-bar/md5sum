@@ -60,13 +60,13 @@ namespace md5sum
             // 
             this.TbShow.AllowDrop = true;
             this.TbShow.BackColor = System.Drawing.SystemColors.Window;
-            this.TbShow.Location = new System.Drawing.Point(12, 12);
+            this.TbShow.Location = new System.Drawing.Point(14, 14);
             this.TbShow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TbShow.Multiline = true;
             this.TbShow.Name = "TbShow";
             this.TbShow.ReadOnly = true;
             this.TbShow.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TbShow.Size = new System.Drawing.Size(750, 277);
+            this.TbShow.Size = new System.Drawing.Size(843, 332);
             this.TbShow.TabIndex = 14;
             this.TbShow.WordWrap = false;
             this.TbShow.DragDrop += new System.Windows.Forms.DragEventHandler(this.TbShow_DragDrop);
@@ -82,11 +82,11 @@ namespace md5sum
             this.GbCalc.Controls.Add(this.CbMd5);
             this.GbCalc.Controls.Add(this.CbTime);
             this.GbCalc.Controls.Add(this.CbVersion);
-            this.GbCalc.Location = new System.Drawing.Point(12, 293);
+            this.GbCalc.Location = new System.Drawing.Point(14, 352);
             this.GbCalc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GbCalc.Name = "GbCalc";
             this.GbCalc.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.GbCalc.Size = new System.Drawing.Size(750, 56);
+            this.GbCalc.Size = new System.Drawing.Size(844, 67);
             this.GbCalc.TabIndex = 1;
             this.GbCalc.TabStop = false;
             this.GbCalc.Text = "常 用 配 置";
@@ -94,10 +94,10 @@ namespace md5sum
             // CbUpLe
             // 
             this.CbUpLe.AutoSize = true;
-            this.CbUpLe.Location = new System.Drawing.Point(642, 24);
+            this.CbUpLe.Location = new System.Drawing.Point(722, 29);
             this.CbUpLe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbUpLe.Name = "CbUpLe";
-            this.CbUpLe.Size = new System.Drawing.Size(83, 19);
+            this.CbUpLe.Size = new System.Drawing.Size(97, 22);
             this.CbUpLe.TabIndex = 7;
             this.CbUpLe.Text = "大写(&U)";
             this.CbUpLe.UseVisualStyleBackColor = true;
@@ -105,10 +105,10 @@ namespace md5sum
             // CbSha256
             // 
             this.CbSha256.AutoSize = true;
-            this.CbSha256.Location = new System.Drawing.Point(412, 24);
+            this.CbSha256.Location = new System.Drawing.Point(464, 29);
             this.CbSha256.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbSha256.Name = "CbSha256";
-            this.CbSha256.Size = new System.Drawing.Size(101, 19);
+            this.CbSha256.Size = new System.Drawing.Size(115, 22);
             this.CbSha256.TabIndex = 5;
             this.CbSha256.Text = "SHA256(&F)";
             this.CbSha256.UseVisualStyleBackColor = true;
@@ -116,10 +116,10 @@ namespace md5sum
             // CbCrc32
             // 
             this.CbCrc32.AutoSize = true;
-            this.CbCrc32.Location = new System.Drawing.Point(531, 24);
+            this.CbCrc32.Location = new System.Drawing.Point(597, 29);
             this.CbCrc32.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbCrc32.Name = "CbCrc32";
-            this.CbCrc32.Size = new System.Drawing.Size(93, 19);
+            this.CbCrc32.Size = new System.Drawing.Size(106, 22);
             this.CbCrc32.TabIndex = 6;
             this.CbCrc32.Text = "CRC32(&R)";
             this.CbCrc32.UseVisualStyleBackColor = true;
@@ -127,10 +127,10 @@ namespace md5sum
             // CbSha1
             // 
             this.CbSha1.AutoSize = true;
-            this.CbSha1.Location = new System.Drawing.Point(309, 24);
+            this.CbSha1.Location = new System.Drawing.Point(348, 29);
             this.CbSha1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbSha1.Name = "CbSha1";
-            this.CbSha1.Size = new System.Drawing.Size(85, 19);
+            this.CbSha1.Size = new System.Drawing.Size(97, 22);
             this.CbSha1.TabIndex = 4;
             this.CbSha1.Text = "SHA1(&A)";
             this.CbSha1.UseVisualStyleBackColor = true;
@@ -138,10 +138,10 @@ namespace md5sum
             // CbMd5
             // 
             this.CbMd5.AutoSize = true;
-            this.CbMd5.Location = new System.Drawing.Point(214, 24);
+            this.CbMd5.Location = new System.Drawing.Point(241, 29);
             this.CbMd5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbMd5.Name = "CbMd5";
-            this.CbMd5.Size = new System.Drawing.Size(77, 19);
+            this.CbMd5.Size = new System.Drawing.Size(88, 22);
             this.CbMd5.TabIndex = 3;
             this.CbMd5.Text = "MD5(&M)";
             this.CbMd5.UseVisualStyleBackColor = true;
@@ -149,10 +149,10 @@ namespace md5sum
             // CbTime
             // 
             this.CbTime.AutoSize = true;
-            this.CbTime.Location = new System.Drawing.Point(113, 24);
+            this.CbTime.Location = new System.Drawing.Point(127, 29);
             this.CbTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbTime.Name = "CbTime";
-            this.CbTime.Size = new System.Drawing.Size(83, 19);
+            this.CbTime.Size = new System.Drawing.Size(97, 22);
             this.CbTime.TabIndex = 2;
             this.CbTime.Text = "时间(&T)";
             this.CbTime.UseVisualStyleBackColor = true;
@@ -160,10 +160,10 @@ namespace md5sum
             // CbVersion
             // 
             this.CbVersion.AutoSize = true;
-            this.CbVersion.Location = new System.Drawing.Point(12, 24);
+            this.CbVersion.Location = new System.Drawing.Point(14, 29);
             this.CbVersion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbVersion.Name = "CbVersion";
-            this.CbVersion.Size = new System.Drawing.Size(83, 19);
+            this.CbVersion.Size = new System.Drawing.Size(97, 22);
             this.CbVersion.TabIndex = 1;
             this.CbVersion.Text = "版本(&V)";
             this.CbVersion.UseVisualStyleBackColor = true;
@@ -171,62 +171,62 @@ namespace md5sum
             // LbRate
             // 
             this.LbRate.AutoSize = true;
-            this.LbRate.Location = new System.Drawing.Point(9, 355);
+            this.LbRate.Location = new System.Drawing.Point(10, 426);
             this.LbRate.Name = "LbRate";
-            this.LbRate.Size = new System.Drawing.Size(82, 15);
+            this.LbRate.Size = new System.Drawing.Size(98, 18);
             this.LbRate.TabIndex = 2;
             this.LbRate.Text = "当前文件：";
             // 
             // LbComplete
             // 
             this.LbComplete.AutoSize = true;
-            this.LbComplete.Location = new System.Drawing.Point(9, 385);
+            this.LbComplete.Location = new System.Drawing.Point(10, 462);
             this.LbComplete.Name = "LbComplete";
-            this.LbComplete.Size = new System.Drawing.Size(82, 15);
+            this.LbComplete.Size = new System.Drawing.Size(98, 18);
             this.LbComplete.TabIndex = 3;
             this.LbComplete.Text = "全部文件：";
             // 
             // PbNow
             // 
-            this.PbNow.Location = new System.Drawing.Point(97, 355);
+            this.PbNow.Location = new System.Drawing.Point(109, 426);
             this.PbNow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PbNow.Name = "PbNow";
-            this.PbNow.Size = new System.Drawing.Size(665, 15);
+            this.PbNow.Size = new System.Drawing.Size(748, 18);
             this.PbNow.TabIndex = 6;
             // 
             // PbAll
             // 
-            this.PbAll.Location = new System.Drawing.Point(97, 385);
+            this.PbAll.Location = new System.Drawing.Point(109, 462);
             this.PbAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PbAll.Name = "PbAll";
-            this.PbAll.Size = new System.Drawing.Size(665, 15);
+            this.PbAll.Size = new System.Drawing.Size(748, 18);
             this.PbAll.TabIndex = 7;
             // 
             // LbCmpare
             // 
             this.LbCmpare.AutoSize = true;
-            this.LbCmpare.Location = new System.Drawing.Point(9, 417);
+            this.LbCmpare.Location = new System.Drawing.Point(10, 500);
             this.LbCmpare.Name = "LbCmpare";
-            this.LbCmpare.Size = new System.Drawing.Size(142, 15);
+            this.LbCmpare.Size = new System.Drawing.Size(170, 18);
             this.LbCmpare.TabIndex = 6;
             this.LbCmpare.Text = "输入待比对校验码：";
             // 
             // TbInput
             // 
-            this.TbInput.Location = new System.Drawing.Point(157, 412);
+            this.TbInput.Location = new System.Drawing.Point(177, 494);
             this.TbInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TbInput.Name = "TbInput";
-            this.TbInput.Size = new System.Drawing.Size(494, 25);
+            this.TbInput.Size = new System.Drawing.Size(555, 28);
             this.TbInput.TabIndex = 8;
             this.TbInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbInput_KeyUp);
             // 
             // btnCmpare
             // 
             this.btnCmpare.Enabled = false;
-            this.btnCmpare.Location = new System.Drawing.Point(657, 411);
+            this.btnCmpare.Location = new System.Drawing.Point(739, 493);
             this.btnCmpare.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCmpare.Name = "btnCmpare";
-            this.btnCmpare.Size = new System.Drawing.Size(105, 30);
+            this.btnCmpare.Size = new System.Drawing.Size(118, 36);
             this.btnCmpare.TabIndex = 9;
             this.btnCmpare.Text = "比对(&O)";
             this.btnCmpare.UseVisualStyleBackColor = true;
@@ -234,10 +234,10 @@ namespace md5sum
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(12, 454);
+            this.btnBrowse.Location = new System.Drawing.Point(14, 545);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(105, 30);
+            this.btnBrowse.Size = new System.Drawing.Size(118, 36);
             this.btnBrowse.TabIndex = 0;
             this.btnBrowse.Text = "浏览(&B)";
             this.btnBrowse.UseVisualStyleBackColor = true;
@@ -246,10 +246,10 @@ namespace md5sum
             // btnCopy
             // 
             this.btnCopy.Enabled = false;
-            this.btnCopy.Location = new System.Drawing.Point(173, 454);
+            this.btnCopy.Location = new System.Drawing.Point(195, 545);
             this.btnCopy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(105, 30);
+            this.btnCopy.Size = new System.Drawing.Size(118, 36);
             this.btnCopy.TabIndex = 10;
             this.btnCopy.Text = "复制(&C)";
             this.btnCopy.UseVisualStyleBackColor = true;
@@ -258,10 +258,10 @@ namespace md5sum
             // btnClear
             // 
             this.btnClear.Enabled = false;
-            this.btnClear.Location = new System.Drawing.Point(334, 454);
+            this.btnClear.Location = new System.Drawing.Point(376, 545);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(105, 30);
+            this.btnClear.Size = new System.Drawing.Size(118, 36);
             this.btnClear.TabIndex = 11;
             this.btnClear.Text = "清除(&E)";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -270,10 +270,10 @@ namespace md5sum
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(495, 454);
+            this.btnSave.Location = new System.Drawing.Point(557, 545);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(105, 30);
+            this.btnSave.Size = new System.Drawing.Size(118, 36);
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "保存(&S)";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -281,10 +281,10 @@ namespace md5sum
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(656, 454);
+            this.btnClose.Location = new System.Drawing.Point(738, 545);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(105, 30);
+            this.btnClose.Size = new System.Drawing.Size(118, 36);
             this.btnClose.TabIndex = 13;
             this.btnClose.Text = "关闭(&X)";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -305,9 +305,9 @@ namespace md5sum
             // Md5Form
             // 
             this.AcceptButton = this.btnBrowse;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 492);
+            this.ClientSize = new System.Drawing.Size(871, 590);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClear);
@@ -328,6 +328,7 @@ namespace md5sum
             this.MaximizeBox = false;
             this.Name = "Md5Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = Md5Form.Md5FormName;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Md5Form_FormClosed);
             this.Load += new System.EventHandler(this.Md5Form_Load);
             this.GbCalc.ResumeLayout(false);
