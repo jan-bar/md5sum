@@ -16,7 +16,7 @@ namespace md5sum
         private long nowBytes, allBytes;
 
         private readonly string sCase;
-        private readonly int calcCount = 0;
+        private int calcCount = 0;
         private readonly bool[] condition = { true, true, true, true, true, true, true };
         private readonly CancellationToken token;
 
@@ -61,7 +61,23 @@ namespace md5sum
             {
                 try
                 {
-                    FileInfo fileInfo = new FileInfo(path);
+                    string curPath = path;
+                    if (path.StartsWith("0x"))
+                    {
+                        int status = Convert.ToInt32(path.Substring(2, 2), 16);
+                        calcCount = 0;
+                        if (condition[2] = (status & 1) != 0)
+                            calcCount++;
+                        if (condition[3] = (status & 2) != 0)
+                            calcCount++;
+                        if (condition[4] = (status & 4) != 0)
+                            calcCount++;
+                        if (condition[5] = (status & 8) != 0)
+                            calcCount++;
+                        curPath = path.Substring(4);
+                    }
+
+                    FileInfo fileInfo = new FileInfo(curPath);
 
                     text.Clear().Append("文件路径：").AppendLine(fileInfo.FullName);
                     nowBytes = fileInfo.Length;
@@ -70,7 +86,7 @@ namespace md5sum
 
                     if (condition[0])
                     {
-                        string version = System.Diagnostics.FileVersionInfo.GetVersionInfo(path).FileVersion;
+                        string version = System.Diagnostics.FileVersionInfo.GetVersionInfo(curPath).FileVersion;
                         if (!string.IsNullOrEmpty(version))
                             text.Append("文件版本：").AppendLine(version);
                     }
@@ -83,7 +99,7 @@ namespace md5sum
                         allBytes = calcCount * nowBytes;
                         nowBytes = 0;
 
-                        fr = File.OpenRead(path);
+                        fr = File.OpenRead(curPath);
                         if (condition[2])
                             CalculateHash(MD5.Create(), fr, "MD5    ：");
                         if (condition[3])

@@ -22,3 +22,5 @@
 6.  用管理员权限打开cmd,执行`md5sum.exe reg`可以将本程序注册到右键菜单。
 7.  用管理员权限打开cmd,执行`md5sum.exe unreg`可以移除右键菜单。
 8.  程序单例运行,已有程序运行时再使用命令行、右键菜单等操作仍然是在之前进程中计算。
+9.  支持命令行指定计算hash类型。指定所有hash类型都要计算`md5sum.exe all?d:\tmp.txt`。
+10.  指定4种hash类型的组合:`md5sum.exe md5?sha1?sha256?crc32?d:\tmp.txt`。

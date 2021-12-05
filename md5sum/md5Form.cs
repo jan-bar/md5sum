@@ -292,9 +292,52 @@ namespace md5sum
         {
             List<string> sendPaths = new List<string>();
             foreach (string s in paths)
+            {
                 if (File.Exists(s))
-                    /* 文件存在则将文件绝对路径加入列表 */
+                {
                     sendPaths.Add(Path.GetFullPath(s));
+                }
+                else
+                {
+                    int status = 0;
+                    string cur = null;
+                    foreach (string sp in s.Split('?'))
+                    {
+                        switch (sp.ToUpper())
+                        {
+                            case "MD5":
+                                status |= 1;
+                                break;
+                            case "SHA1":
+                                status |= 2;
+                                break;
+                            case "SHA256":
+                                status |= 4;
+                                break;
+                            case "CRC32":
+                                status |= 8;
+                                break;
+                            case "ALL":
+                                status = 0xf;
+                                break;
+                            default:
+                                if (File.Exists(sp))
+                                {
+                                    cur = Path.GetFullPath(sp);
+                                }
+                                break;
+                        }
+                    }
+                    if (cur != null)
+                    {
+                        if (status > 0)
+                        {
+                            cur = "0x" + status.ToString("x2") + cur;
+                        }
+                        sendPaths.Add(cur);
+                    }
+                }
+            }
             return sendPaths.ToArray();
         }
 
@@ -304,10 +347,6 @@ namespace md5sum
         /// <param name="paths">文件路径</param>
         public static void SendFile(string[] paths)
         {
-            paths = FilterPath(paths);
-            if (paths.Length <= 0)
-                return;
-
             using (NamedPipeClientStream client = new NamedPipeClientStream("localhost", Md5FormName, PipeDirection.Out))
             {
                 client.Connect(5000);
