@@ -9,8 +9,7 @@
 前言：  
 之所以想做这个软件是因为一直在使用的<http://keir.net/hash.html>软件有很多功能不能满足。  
 经过自学C#，研究多线程，异步更新UI，等等知识，终于用C#完成了一个自己使用的md5sum.exe。  
-可以去：<https://download.csdn.net/download/niha1993825jian/15294732>下载已经编译好的可执行程序。  
-文件解压密码为：janbar
+下载：[md5sum_x64.exe](md5sum/md5sum_x64.exe)，[md5sum_x86.exe](md5sum/md5sum_x86.exe)
 
 #### 使用说明
 
